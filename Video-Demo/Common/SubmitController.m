@@ -257,6 +257,7 @@ static void __FFmpegCallBack(int64_t current, int64_t total) {
     NSString *ouput_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"/tmp"] stringByAppendingPathComponent:@"1920x1080.mp4"];
     // -i 4K.mp4 -s 1920x1080 -b 6207k -vcodec h264 1920x1080.mp4
     NSArray<NSString *> *commands = @[@"ffmpeg",
+                                      @"-y",
                                       @"-i",
                                       input_path,
                                       @"-s",
@@ -264,7 +265,7 @@ static void __FFmpegCallBack(int64_t current, int64_t total) {
                                       @"-b",
                                       @"6207k",
                                       @"-vcodec",
-                                      @"h264",
+                                      @"h264_videotoolbox",
                                       ouput_path];
     int argc = (int)commands.count;
     char **argv = (char**)malloc(sizeof(char*)*argc);

@@ -81,3 +81,4 @@ iOSInjectionProject/
 # End of https://www.gitignore.io/api/mac,objective-c
 # mp4
 *.mp4
+/.DS_Store

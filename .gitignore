@@ -4,6 +4,10 @@
 
 #!! ERROR: mac is undefined. Use list command to see defined gitignore types !!#
 
+# MacOS
+
+.DS_Store
+*/.DS_Store
 ### Objective-C ###
 # Xcode
 #

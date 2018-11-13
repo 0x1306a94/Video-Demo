@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubmitController">
+            <connections>
+                <outlet property="Btn1080P" destination="GuB-u3-znJ" id="dzl-xr-0aA"/>
+                <outlet property="BtnLow" destination="l8U-yW-DpE" id="rtS-LD-AZf"/>
+                <outlet property="BtnMedium" destination="G26-Mb-FV8" id="Fq6-2n-Q6P"/>
+                <outlet property="btn480P" destination="GIF-Oc-RtF" id="hsq-bR-D9t"/>
+                <outlet property="btn720P" destination="IKY-P9-dqt" id="27N-W5-O6z"/>
+                <outlet property="btnCancle" destination="BQb-se-Dav" id="vfB-x1-VBf"/>
+                <outlet property="btnHighest" destination="AZO-c8-6Iv" id="pXb-mM-vum"/>
+                <outlet property="progressView" destination="Ou7-Sr-MWY" id="GG9-eO-ccz"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuB-u3-znJ">
+                    <rect key="frame" x="100" y="120" width="35" height="30"/>
+                    <state key="normal" title="1080"/>
+                    <connections>
+                        <action selector="export1080P" destination="-1" eventType="touchUpInside" id="q6q-QB-9tV"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKY-P9-dqt">
+                    <rect key="frame" x="102.5" y="165" width="30" height="30"/>
+                    <state key="normal" title="720"/>
+                    <connections>
+                        <action selector="export720P" destination="-1" eventType="touchUpInside" id="EYv-qP-6hw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIF-Oc-RtF">
+                    <rect key="frame" x="102" y="210" width="30" height="30"/>
+                    <state key="normal" title="480"/>
+                    <connections>
+                        <action selector="export480P" destination="-1" eventType="touchUpInside" id="heE-Yy-Hzi"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZO-c8-6Iv">
+                    <rect key="frame" x="224" y="120" width="51" height="30"/>
+                    <state key="normal" title="highest"/>
+                    <connections>
+                        <action selector="exportHighest" destination="-1" eventType="touchUpInside" id="Atb-Ch-QoY"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G26-Mb-FV8">
+                    <rect key="frame" x="222" y="165" width="55" height="30"/>
+                    <state key="normal" title="medium"/>
+                    <connections>
+                        <action selector="exportMedium" destination="-1" eventType="touchUpInside" id="onQ-a0-x5J"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8U-yW-DpE">
+                    <rect key="frame" x="234.5" y="210" width="30" height="30"/>
+                    <state key="normal" title="low"/>
+                    <connections>
+                        <action selector="exportLow" destination="-1" eventType="touchUpInside" id="la6-0z-Unl"/>
+                    </connections>
+                </button>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ou7-Sr-MWY">
+                    <rect key="frame" x="20" y="340" width="335" height="5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="5" id="0Py-JF-UnX"/>
+                    </constraints>
+                    <color key="progressTintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </progressView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQb-se-Dav">
+                    <rect key="frame" x="172" y="290" width="31" height="30"/>
+                    <state key="normal" title="取消"/>
+                    <connections>
+                        <action selector="cancleExport" destination="-1" eventType="touchUpInside" id="auk-UQ-Vkm"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="G26-Mb-FV8" firstAttribute="centerX" secondItem="AZO-c8-6Iv" secondAttribute="centerX" id="3Ef-l4-Cge"/>
+                <constraint firstAttribute="trailing" secondItem="Ou7-Sr-MWY" secondAttribute="trailing" constant="20" id="8vE-OC-7kv"/>
+                <constraint firstItem="GuB-u3-znJ" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="100" id="CY7-hm-Pxt"/>
+                <constraint firstItem="l8U-yW-DpE" firstAttribute="centerY" secondItem="GIF-Oc-RtF" secondAttribute="centerY" id="F7d-1U-vsy"/>
+                <constraint firstItem="IKY-P9-dqt" firstAttribute="centerX" secondItem="GuB-u3-znJ" secondAttribute="centerX" id="KYm-Rh-ot0"/>
+                <constraint firstItem="G26-Mb-FV8" firstAttribute="centerY" secondItem="IKY-P9-dqt" secondAttribute="centerY" id="Qy3-57-YAB"/>
+                <constraint firstItem="AZO-c8-6Iv" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="100" id="Uux-Al-Van"/>
+                <constraint firstItem="GuB-u3-znJ" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="100" id="YEB-40-zSo"/>
+                <constraint firstItem="Ou7-Sr-MWY" firstAttribute="top" secondItem="GIF-Oc-RtF" secondAttribute="bottom" constant="100" id="ZNZ-ud-2Bm"/>
+                <constraint firstItem="Ou7-Sr-MWY" firstAttribute="top" secondItem="BQb-se-Dav" secondAttribute="bottom" constant="20" id="dWw-v0-m4B"/>
+                <constraint firstItem="GIF-Oc-RtF" firstAttribute="centerX" secondItem="IKY-P9-dqt" secondAttribute="centerX" id="djU-bc-ohV"/>
+                <constraint firstItem="IKY-P9-dqt" firstAttribute="top" secondItem="GuB-u3-znJ" secondAttribute="bottom" constant="15" id="hAj-lc-zrj"/>
+                <constraint firstItem="GIF-Oc-RtF" firstAttribute="top" secondItem="IKY-P9-dqt" secondAttribute="bottom" constant="15" id="iiw-iY-TAf"/>
+                <constraint firstItem="Ou7-Sr-MWY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="nsj-2B-QAo"/>
+                <constraint firstItem="l8U-yW-DpE" firstAttribute="centerX" secondItem="G26-Mb-FV8" secondAttribute="centerX" id="yFP-TM-qv0"/>
+                <constraint firstItem="BQb-se-Dav" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="zKJ-4o-OdM"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="AZO-c8-6Iv" secondAttribute="trailing" constant="100" id="zQc-0m-cil"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+</document>

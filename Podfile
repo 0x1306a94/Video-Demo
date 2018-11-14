@@ -12,6 +12,9 @@ target 'Video-Demo' do
   pod 'SDWebImage'
   pod 'Aspects'
   pod 'FLEX'
+#  pod 'AliyunVideoSDKBasic'
+#  pod 'PLShortVideoKit'
+#  pod 'PLPlayerKit'
   
   pod 'ZFPlayer', :subspecs => [
     'AVPlayer',

@@ -7,10 +7,12 @@
 //
 
 #import "SubmitController.h"
+#import "ffmpeg.h"
 
 #import <ReactiveObjC/ReactiveObjC.h>
+//#import <PLShortVideoKit/PLShortVideoKit.h>
+//#import <AliyunVideoSDKPro/AliyunVideoSDKPro.h>
 
-#import "ffmpeg.h"
 
 static __weak SubmitController *__this__ = nil;
 
@@ -18,18 +20,15 @@ static __weak SubmitController *__this__ = nil;
 @property (weak, nonatomic) IBOutlet UIButton *Btn1080P;
 @property (weak, nonatomic) IBOutlet UIButton *btn720P;
 @property (weak, nonatomic) IBOutlet UIButton *btn480P;
-@property (weak, nonatomic) IBOutlet UIButton *btnHighest;
-@property (weak, nonatomic) IBOutlet UIButton *BtnMedium;
-@property (weak, nonatomic) IBOutlet UIButton *BtnLow;
 @property (weak, nonatomic) IBOutlet UIButton *btnCancle;
 
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (nonatomic, weak) NSTimer *timer;
-@property (nonatomic, strong) NSString *directory;
 @property (nonatomic, strong) AVAssetExportSession *exportSession;
 
 @property (nonatomic, strong) NSDate *startTime;
-@property (nonatomic, strong) NSFileHandle *logFile;
+    
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @end
 
 @implementation SubmitController
@@ -44,24 +43,20 @@ static __weak SubmitController *__this__ = nil;
     // Do any additional setup after loading the view from its nib.
     [self checkSupportPreset];
     __this__ = self;
-//    NSNumber *size = nil;
-//    [self.asset.URL getResourceValue:&size forKey:NSURLFileSizeKey error:nil];
-//    if (size) {
-//        NSByteCountFormatter *formatter = [[NSByteCountFormatter alloc] init];
-//        formatter.allowedUnits = NSByteCountFormatterUseMB;
-//        formatter.countStyle = NSByteCountFormatterCountStyleBinary;
-//        NSLog(@"原始大小 %@", [formatter stringFromByteCount:size.unsignedLongLongValue]);
-//        NSString *log = [NSString stringWithFormat:@"原始大小 %@\n", [formatter stringFromByteCount:size.unsignedLongLongValue]];
-//        [self writeLog:log];
-//    }
-//
-//    NSArray *tracks = [self.asset tracksWithMediaType:AVMediaTypeVideo];
-//    if([tracks count] > 0) {
-//        AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
-//        NSLog(@"%.f FPS %dx%d", videoTrack.nominalFrameRate, (int)videoTrack.naturalSize.width, (int)videoTrack.naturalSize.height);
-//        NSString *log = [NSString stringWithFormat:@"%.f FPS %dx%d\n", videoTrack.nominalFrameRate, (int)videoTrack.naturalSize.width, (int)videoTrack.naturalSize.height];
-//        [self writeLog:log];
-//    }
+    NSNumber *size = nil;
+    [self.asset.URL getResourceValue:&size forKey:NSURLFileSizeKey error:nil];
+    if (size) {
+        NSByteCountFormatter *formatter = [[NSByteCountFormatter alloc] init];
+        formatter.allowedUnits = NSByteCountFormatterUseMB;
+        formatter.countStyle = NSByteCountFormatterCountStyleBinary;
+        NSLog(@"原始大小 %@", [formatter stringFromByteCount:size.unsignedLongLongValue]);
+    }
+
+    NSArray *tracks = [self.asset tracksWithMediaType:AVMediaTypeVideo];
+    if([tracks count] > 0) {
+        AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
+        NSLog(@"%.f FPS %dx%d", videoTrack.nominalFrameRate, (int)videoTrack.naturalSize.width, (int)videoTrack.naturalSize.height);
+    }
     self.btnCancle.enabled = NO;
     
 }
@@ -72,15 +67,13 @@ static __weak SubmitController *__this__ = nil;
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    __this__ = nil;
 }
 - (void)checkSupportPreset {
     NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:self.asset];
     self.Btn1080P.enabled = [compatiblePresets containsObject:AVAssetExportPreset1920x1080];
     self.btn720P.enabled = [compatiblePresets containsObject:AVAssetExportPreset1280x720];
     self.btn480P.enabled = [compatiblePresets containsObject:AVAssetExportPreset640x480];
-    self.btnHighest.enabled = [compatiblePresets containsObject:AVAssetExportPresetHighestQuality];
-    self.BtnMedium.enabled = [compatiblePresets containsObject:AVAssetExportPresetMediumQuality];
-    self.BtnLow.enabled = [compatiblePresets containsObject:AVAssetExportPresetLowQuality];
     
 }
 
@@ -88,9 +81,6 @@ static __weak SubmitController *__this__ = nil;
     self.Btn1080P.enabled = NO;
     self.btn720P.enabled = NO;
     self.btn480P.enabled = NO;
-    self.btnHighest.enabled = NO;
-    self.BtnMedium.enabled = NO;
-    self.BtnLow.enabled = NO;
 }
 
 - (IBAction)export1080P {
@@ -108,21 +98,6 @@ static __weak SubmitController *__this__ = nil;
     [self exportPreset:AVAssetExportPreset640x480 fileName:@"640x480.mp4"];
 }
 
-- (IBAction)exportHighest {
-    [self disableAllBtn];
-    [self exportPreset:AVAssetExportPresetHighestQuality fileName:@"highest.mp4"];
-}
-
-- (IBAction)exportMedium {
-    [self disableAllBtn];
-    [self exportPreset:AVAssetExportPresetMediumQuality fileName:@"medium.mp4"];
-}
-
-- (IBAction)exportLow {
-    [self disableAllBtn];
-    [self exportPreset:AVAssetExportPresetLowQuality fileName:@"low.mp4"];
-}
-
 - (IBAction)cancleExport {
     [self checkSupportPreset];
     self.progressView.progress = 0;
@@ -131,42 +106,39 @@ static __weak SubmitController *__this__ = nil;
     self.btnCancle.enabled = NO;
 }
 
-- (BOOL)createDirectory {
-    if (self.directory.length > 0) return YES;
-    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"/tmp/%@-export", [NSDate date].description]];
-    NSError *error = nil;
-    if ([[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error] && error == nil) {
-        self.directory = path;
-        return YES;
-    }
-    return NO;
-}
+
 - (void)exportPreset:(NSString *)presetName fileName:(NSString *)fileName {
-//    if (![self createDirectory]) {
-//        NSLog(@"无法创建工作目录");
-//        return;
-//    }
-//    NSString *input_Path = [self.asset.URL.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
-    NSString *input_path = [[NSBundle mainBundle] pathForResource:@"4K.mp4" ofType:nil];
+    switch (self.segmentedControl.selectedSegmentIndex) {
+        case 0:
+        {
+            [self useSystem:presetName fileName:fileName];
+            break;
+        }
+        case 1:
+        {
+            [self useFFmpeg:presetName fileName:fileName];
+            break;
+        }
+        case 2:
+        {
+            [self useAliYun:presetName fileName:fileName];
+            break;
+        }
+        case 3:
+        {
+            [self useQiNiu:presetName fileName:fileName];
+            break;
+        }
+        default:
+        break;
+    }
+}
+
+- (void)useSystem:(NSString *)presetName fileName:(NSString *)fileName {
+    
     NSString *ouput_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"/tmp"] stringByAppendingPathComponent:fileName];
-    // ffmpeg -i 4K.mp4 -s 1920x1080 -vcodec h264 1080.mp4
-    NSArray<NSString *> *commands = @[@"ffmpeg",
-                                      @"-i",
-                                      input_path,
-                                      @"-s",
-                                      @"1920x1080",
-                                      @"-b",
-                                      @"6207k",
-                                      @"-vcodec",
-                                      @"h264",
-                                      ouput_path];
-    
-    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(useFFmpeg) object:nil];
-    thread.name = @"ffmpeg.export.thread";
-    [thread start];
-    return;
+
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:self.asset presetName:presetName];
-    
     //输出URL
     exportSession.outputURL = [NSURL fileURLWithPath:ouput_path];
     //优化网络
@@ -202,26 +174,19 @@ static __weak SubmitController *__this__ = nil;
                     int64_t second = (timer)%60;
                     NSString *timerStr = [NSString stringWithFormat:@"%02lld:%02lld:%02lld", hours, minutes, second];
                     NSLog(@"完成转码::转码格式: %@ 转码后大小 %@ 耗时: %@",presetName, [formatter stringFromByteCount:size], timerStr);
-                    NSString *log = [NSString stringWithFormat:@"完成转码:::::\n转码格式: %@\n转码后大小 %@ \n耗时: %@\n",presetName, [formatter stringFromByteCount:size], timerStr];
-                    [self writeLog:log];
                 }
             } else if (exportSession.error) {
                 NSLog(@"转码错误: %@",exportSession.error);
-                NSString *log = [NSString stringWithFormat:@"转码错误: %@\n",exportSession.error];
-                [self writeLog:log];
             }
         });
     }];
     
     if (exportSession.error) {
         NSLog(@"转码错误: %@", exportSession.error);
-        NSString *log = [NSString stringWithFormat:@"转码错误: %@\n",exportSession.error];
-        [self writeLog:log];
         self.exportSession = nil;
         return;
     } else {
         NSLog(@"开始转码...");
-        [self writeLog:@"开始转码....\n"];
         if (self.timer) {
             [self.timer invalidate];
             self.timer = nil;
@@ -235,6 +200,42 @@ static __weak SubmitController *__this__ = nil;
 }
 
 
+- (void)useFFmpeg:(NSString *)presetName fileName:(NSString *)fileName {
+    
+    NSString *input_path = [self.asset.URL.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
+    NSString *ouput_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"/tmp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"ffmpeg_%@", fileName]];
+    NSString *size = nil;
+    NSString *bit_rate = nil;
+    if ([presetName isEqualToString:AVAssetExportPreset1920x1080]) {
+        size = @"1920x1080";
+        bit_rate = @"2500k";
+    } else if ([presetName isEqualToString:AVAssetExportPreset1280x720]) {
+        size = @"1280x720";
+        bit_rate = @"1500k";
+    } else if ([presetName isEqualToString:AVAssetExportPreset640x480]) {
+        size = @"640x480";
+        bit_rate = @"1000k";
+    } else {
+        return;
+    }
+    NSArray<NSString *> *commands = @[@"-y",
+                                      @"-i",
+                                      input_path,
+                                      @"-s",
+                                      size,
+                                      @"-b",
+                                      bit_rate,
+                                      @"-vcodec",
+                                      @"h264_videotoolbox",
+//                                      @"-r",
+//                                      @"30",
+                                      ouput_path];
+    
+    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(startFFmpeg:) object:commands];
+    thread.name = @"ffmpeg.transcode.thread";
+    [thread start];
+}
+    
 static NSDate *date = nil;
 static void __FFmpegCallBack(int64_t current, int64_t total) {
     NSLog(@"转码进度: %lld/%lld", current, total);
@@ -251,38 +252,31 @@ static void __FFmpegCallBack(int64_t current, int64_t total) {
         __this__.progressView.progress = progress;
     });
 }
-- (void)useFFmpeg {
-    NSString *input_path = [[NSBundle mainBundle] pathForResource:@"4K.mp4" ofType:nil];
-    input_path = [self.asset.URL.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
-    NSString *ouput_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"/tmp"] stringByAppendingPathComponent:@"1920x1080.mp4"];
-    // -i 4K.mp4 -s 1920x1080 -b 6207k -vcodec h264 1920x1080.mp4
-    NSArray<NSString *> *commands = @[@"ffmpeg",
-                                      @"-y",
-                                      @"-i",
-                                      input_path,
-                                      @"-s",
-                                      @"1920x1080",
-                                      @"-b",
-                                      @"6207k",
-                                      @"-vcodec",
-                                      @"h264_videotoolbox",
-                                      ouput_path];
-    int argc = (int)commands.count;
-    char **argv = (char**)malloc(sizeof(char*)*argc);
-    for (int i = 0; i < argc; i++) {
-        argv[i] = (char*)malloc(sizeof(char)*1024);
-        strcpy(argv[i],[[commands objectAtIndex:i] UTF8String]);
+- (void)startFFmpeg:(NSArray<NSString *> *)commands {
+    @autoreleasepool {
+        int argc = (int)commands.count + 1;
+        char **argv[argc];
+        argv[0] = "ffmpeg";
+        int idx = 1;
+        for (NSString *cmd in commands) {
+            argv[idx] = cmd.UTF8String;
+            idx++;
+        }
+        NSString *finalCommand = [NSString stringWithFormat:@"ffmpeg 运行参数: \nffmpeg %@", [commands componentsJoinedByString:@" "]];
+        NSLog(@"%@\n%@", finalCommand, [NSThread currentThread].name);
+        date = [NSDate date];
+        ffmpeg_main(argc, argv, &__FFmpegCallBack);
     }
-    NSString *finalCommand = [NSString stringWithFormat:@"ffmpeg 运行参数: \n%@", [commands componentsJoinedByString:@" "]];
-    NSLog(@"%@\n%@", finalCommand, [NSThread currentThread].name);
-    date = [NSDate date];
-    ffmpeg_main(argc, argv, &__FFmpegCallBack);
+}
+- (void)useAliYun:(NSString *)presetName fileName:(NSString *)fileName {
+    
+}
+- (void)useQiNiu:(NSString *)presetName fileName:(NSString *)fileName {
+    
 }
 - (void)exportProgress {
     if (self.exportSession.error) {
         NSLog(@"转码错误: %@", self.exportSession.error);
-        NSString *log = [NSString stringWithFormat:@"转码错误: %@\n",self.exportSession.error];
-        [self writeLog:log];
         [self checkSupportPreset];
         self.btnCancle.enabled = NO;
         self.progressView.progress = 0;
@@ -302,24 +296,4 @@ static void __FFmpegCallBack(int64_t current, int64_t total) {
     }
 }
 
-
-
-- (void)writeLog:(NSString *)log {
-    if (![self createDirectory]) {
-        NSLog(@"无法创建工作目录");
-        return;
-    }
-    
-    if (!self.logFile) {
-        NSString *logPath = [self.directory stringByAppendingPathComponent:@"export.log"];
-        [[NSFileManager defaultManager] createFileAtPath:logPath contents:nil attributes:nil];
-        self.logFile = [NSFileHandle fileHandleForUpdatingAtPath:logPath];
-    }
-    
-    [self.logFile seekToEndOfFile];
-    NSData *strData = [log dataUsingEncoding:NSUTF8StringEncoding];
-    [self.logFile writeData:strData];
-    [self.logFile synchronizeFile];
-    
-}
 @end

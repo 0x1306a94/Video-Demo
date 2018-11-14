@@ -16,8 +16,6 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <FLEX/FLEX.h>
 
-
-
 @interface ViewController ()
 @property (nonatomic, assign) BOOL requestPermissioned;
 @property (weak, nonatomic) IBOutlet UIButton *fecthVideoButton;

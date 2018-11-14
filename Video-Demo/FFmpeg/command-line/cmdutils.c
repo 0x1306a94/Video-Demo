@@ -141,6 +141,7 @@ void exit_program(int ret)
         program_exit(ret);
 #warning 由于iOS应用是单进程,如果使用 exit 退出进程,则应用会被退出,因此改为退出线程
 //    exit(ret);
+    printf("退出代码: %d\n",ret);
     pthread_exit(NULL);
 }
 

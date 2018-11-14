@@ -19,7 +19,6 @@
 		3C6F2CAF21995C7600C87BD8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2CAE21995C7600C87BD8 /* CoreMedia.framework */; };
 		3C6F2CB121995C8000C87BD8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2CB021995C8000C87BD8 /* VideoToolbox.framework */; };
 		3C6F2CB321995CF000C87BD8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2CB221995CF000C87BD8 /* AudioToolbox.framework */; };
-		3C6F2DBE2199831600C87BD8 /* 4K.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3C6F2DBD2199831600C87BD8 /* 4K.mp4 */; };
 		3C6F2DE42199B07900C87BD8 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DDB2199B06800C87BD8 /* libswresample.a */; };
 		3C6F2DE52199B07900C87BD8 /* libavresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DDC2199B06B00C87BD8 /* libavresample.a */; };
 		3C6F2DE62199B07900C87BD8 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DDD2199B06D00C87BD8 /* libavformat.a */; };
@@ -88,7 +87,6 @@
 		3C6F2DB72199732200C87BD8 /* arm64_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = arm64_config.h; sourceTree = "<group>"; };
 		3C6F2DB82199733600C87BD8 /* x86_64_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = x86_64_config.h; sourceTree = "<group>"; };
 		3C6F2DB9219973FB00C87BD8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		3C6F2DBD2199831600C87BD8 /* 4K.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4K.mp4; sourceTree = "<group>"; };
 		3C6F2DDB2199B06800C87BD8 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswresample.a; sourceTree = "<group>"; };
 		3C6F2DDC2199B06B00C87BD8 /* libavresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavresample.a; sourceTree = "<group>"; };
 		3C6F2DDD2199B06D00C87BD8 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavformat.a; sourceTree = "<group>"; };
@@ -237,6 +235,8 @@
 		3C6F2E8B219A5B6F00C87BD8 /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		3C6F2E8D219A5B9400C87BD8 /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		3C6F2E8E219A5C1D00C87BD8 /* va_copy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = va_copy.h; sourceTree = "<group>"; };
+		3C7FCB95219BF6BE0061580C /* emms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = emms.h; sourceTree = "<group>"; };
+		3C7FCB96219BF6D30061580C /* asm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asm.h; sourceTree = "<group>"; };
 		3CB720BD2195235200B40340 /* FetchVideoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FetchVideoController.h; sourceTree = "<group>"; };
 		3CB720BE2195235200B40340 /* FetchVideoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FetchVideoController.m; sourceTree = "<group>"; };
 		3CC23667219514410014DE68 /* Video-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +596,8 @@
 		3C6F2E88219A5B3D00C87BD8 /* x86 */ = {
 			isa = PBXGroup;
 			children = (
+				3C7FCB96219BF6D30061580C /* asm.h */,
+				3C7FCB95219BF6BE0061580C /* emms.h */,
 				3C6F2E8A219A5B6100C87BD8 /* timer.h */,
 			);
 			path = x86;
@@ -612,7 +614,6 @@
 		3CC2365E219514410014DE68 = {
 			isa = PBXGroup;
 			children = (
-				3C6F2DBD2199831600C87BD8 /* 4K.mp4 */,
 				3C6F2C982195260B00C87BD8 /* macros.h */,
 				3C6F2C97219525CE00C87BD8 /* PrefixHeader.pch */,
 				3CC23669219514410014DE68 /* Video-Demo */,
@@ -828,7 +829,6 @@
 				3CC23677219514420014DE68 /* LaunchScreen.storyboard in Resources */,
 				3CC23674219514420014DE68 /* Assets.xcassets in Resources */,
 				3C6F2CA521956F2D00C87BD8 /* SubmitController.xib in Resources */,
-				3C6F2DBE2199831600C87BD8 /* 4K.mp4 in Resources */,
 				3CC23672219514410014DE68 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1115,6 +1115,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 87Q8YX4GE8;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1157,6 +1158,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 87Q8YX4GE8;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

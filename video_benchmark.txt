@@ -1,0 +1,65 @@
+
+iOS 转码测试, 测试设备 iPhone X 注: 视频,音频码率 文件大小 换算单位 (1000)
+
+原始视频信息 
+4K 3840*2160(16:9) 	30FPS video_bit_rate 27080464 bps (27.08Mbps) 	audio_bit_rate 192Kbps 44.1KHz 2(Channel) AAC LC duration 00:03:40 	file_size 751.8M 
+
+FFmpeg 命令行(Mac) 设置参数
+1920*1080(16:9) 	30FPS video_bit_rate 6000000 bps (6Mbps) 		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+1280*720(16:9) 		30FPS video_bit_rate 4000000 bps (4Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+960*540(16:9) 		30FPS video_bit_rate 3000000 bps (3Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+640*480(4:3) 		30FPS video_bit_rate 2000000 bps (2Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+
+转码后信息
+1920*1080(16:9) 	30FPS video_bit_rate 5983000 bps (5.98Mbps) 	audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size 	166.9M 	耗时: 00:01:18
+1280*720(16:9) 		30FPS video_bit_rate 3989000 bps (3.98Mbps) 	audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size	111.9M	耗时: 00:01:14
+960*540(16:9) 		30FPS video_bit_rate 2991000 bps (2.99Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size	84.4M	耗时: 00:01:05
+640*480(4:3) 		30FPS video_bit_rate 1993000 bps (1.99Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size   56.9M	耗时: 00:01:02
+
+FFmpeg 命令行(iOS移植) 设置参数
+1920*1080(16:9) 	30FPS video_bit_rate 6000000 bps (6Mbps) 		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+1280*720(16:9) 		30FPS video_bit_rate 4000000 bps (4Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+960*540(16:9) 		30FPS video_bit_rate 3000000 bps (3Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+640*480(4:3) 		30FPS video_bit_rate 2000000 bps (2Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+
+转码后信息
+1920*1080(16:9) 	30FPS video_bit_rate 6084000 bps (6.08Mbps) 	audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size 	169.1M 	耗时: 00:03:06
+1280*720(16:9) 		30FPS video_bit_rate 4069000 bps (4.06Mbps) 	audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size	115M	耗时: 00:04:26
+960*540(16:9) 		30FPS video_bit_rate 3054000 bps (3.05Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size	86.5M	耗时: 00:02:17
+640*480(4:3) 		30FPS video_bit_rate 2042000 bps (2.04Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size   58.3M	耗时: 00:03:25
+
+系统内置 AVFoundation (AVAssetReader, AVAssetWriter) (AVAssetExportSession 只能使用预设配置, 并且文件也很大 效果也不是很理想) 设置参数
+1920*1080(16:9) 	30FPS video_bit_rate 6000000 bps (6Mbps) 		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+1280*720(16:9) 		30FPS video_bit_rate 4000000 bps (4Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+960*540(16:9) 		30FPS video_bit_rate 3000000 bps (3Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+640*480(4:3)		30FPS video_bit_rate 2000000 bps (2Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+
+转码后信息
+1920*1080(16:9) 	29.93FPS video_bit_rate 6066000 bps (6.03Mbps)  audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size 	169.1M 	耗时: 00:01:13
+1280*720(16:9) 		29.93FPS video_bit_rate 4050000 bps (4.05Mbps) 	audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size	113.5M	耗时: 00:00:55
+960*540(16:9) 		29.93FPS video_bit_rate 3042000 bps (3.04Mbps)	audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size	85.7M	耗时: 00:00:54
+640*480(4:3)		29.93FPS video_bit_rate 2032000 bps (2.03Mbps)	audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size   57.9M	耗时: 00:01:16
+
+阿里SDK 设置参数
+1920*1080(16:9) 	30FPS video_bit_rate 6000000 bps (6Mbps) 		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+1280*720(16:9) 		30FPS video_bit_rate 4000000 bps (4Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+960*540(16:9) 		30FPS video_bit_rate 3000000 bps (3Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+640*480(4:3)		30FPS video_bit_rate 2000000 bps (2Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+
+转码后信息
+1920*1080(16:9) 	30FPS video_bit_rate 6178000 bps (6.17Mbps) 	audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size 	172.2M 	耗时: 00:02:33
+1280*720(16:9) 		30FPS video_bit_rate 4105000 bps (4.10Mbps) 	audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size	115M	耗时: 00:02:25
+960*540(16:9) 		30FPS video_bit_rate 3070000 bps (3.07Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size	86.5M	耗时: 00:02:22
+640*480(4:3) 		30FPS video_bit_rate 2047000 bps (2.04Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC		file_size   58.3M	耗时: 00:02:04
+
+七牛SDK 需要授权 根据运行时信息 推断转码功能也是使用 系统内置 AVFoundation 相关API(SDK 以无法继续测试,需要授权) 设置参数
+1920*1080(16:9) 	30FPS video_bit_rate 6000000 bps (6Mbps) 		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+1280*720(16:9) 		30FPS video_bit_rate 4000000 bps (4Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+960*540(16:9) 		30FPS video_bit_rate 3000000 bps (3Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+640*480(4:3) 		30FPS video_bit_rate 2000000 bps (2Mbps)		audio_bit_rate 64Kbps 44.1KHz 1(Channel) AAC LC
+
+转码后信息 
+1920*1080(16:9) 	30FPS video_bit_rate 6000000 bps (5.72Mbps) 
+1280*720(16:9) 		30FPS video_bit_rate 4000000 bps (3.81Mbps)
+960*540(16:9) 		30FPS video_bit_rate 3000000 bps (2.86Mbps)
+640*480(4:3)		30FPS video_bit_rate 2000000 bps (1.9Mbps)

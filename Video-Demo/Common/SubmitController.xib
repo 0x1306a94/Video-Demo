@@ -57,7 +57,7 @@
                     <rect key="frame" x="58" y="100" width="259" height="29"/>
                     <segments>
                         <segment title="系统"/>
-                        <segment title="FFmpeg"/>
+                        <segment title="FFmpeg" enabled="NO"/>
                         <segment title="阿里"/>
                         <segment title="七牛"/>
                     </segments>

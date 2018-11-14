@@ -19,21 +19,6 @@
 		3C6F2CAF21995C7600C87BD8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2CAE21995C7600C87BD8 /* CoreMedia.framework */; };
 		3C6F2CB121995C8000C87BD8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2CB021995C8000C87BD8 /* VideoToolbox.framework */; };
 		3C6F2CB321995CF000C87BD8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2CB221995CF000C87BD8 /* AudioToolbox.framework */; };
-		3C6F2DE42199B07900C87BD8 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DDB2199B06800C87BD8 /* libswresample.a */; };
-		3C6F2DE52199B07900C87BD8 /* libavresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DDC2199B06B00C87BD8 /* libavresample.a */; };
-		3C6F2DE62199B07900C87BD8 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DDD2199B06D00C87BD8 /* libavformat.a */; };
-		3C6F2DE72199B07900C87BD8 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DDE2199B07000C87BD8 /* libavcodec.a */; };
-		3C6F2DE82199B07900C87BD8 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DDF2199B07200C87BD8 /* libavutil.a */; };
-		3C6F2DE92199B07900C87BD8 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DE02199B07300C87BD8 /* libavfilter.a */; };
-		3C6F2DEA2199B07900C87BD8 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DE12199B07600C87BD8 /* libavdevice.a */; };
-		3C6F2DEB2199B07900C87BD8 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DE22199B07800C87BD8 /* libswscale.a */; };
-		3C6F2DEC2199B07900C87BD8 /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6F2DE32199B07900C87BD8 /* libpostproc.a */; };
-		3C6F2E73219A55E000C87BD8 /* ffmpeg_filter.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F2E6B219A55D600C87BD8 /* ffmpeg_filter.c */; };
-		3C6F2E74219A55E000C87BD8 /* ffmpeg_videotoolbox.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F2E6D219A55D900C87BD8 /* ffmpeg_videotoolbox.c */; };
-		3C6F2E75219A55E000C87BD8 /* ffmpeg_opt.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F2E6E219A55DA00C87BD8 /* ffmpeg_opt.c */; };
-		3C6F2E76219A55E000C87BD8 /* cmdutils.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F2E6F219A55DC00C87BD8 /* cmdutils.c */; };
-		3C6F2E77219A55E000C87BD8 /* ffmpeg_hw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F2E70219A55DD00C87BD8 /* ffmpeg_hw.c */; };
-		3C6F2E78219A55E000C87BD8 /* ffmpeg.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C6F2E71219A55DF00C87BD8 /* ffmpeg.c */; };
 		3CB720BF2195235200B40340 /* FetchVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB720BE2195235200B40340 /* FetchVideoController.m */; };
 		3CC2366C219514410014DE68 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2366B219514410014DE68 /* AppDelegate.m */; };
 		3CC2366F219514410014DE68 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2366E219514410014DE68 /* ViewController.mm */; };
@@ -269,20 +254,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6F2DEA2199B07900C87BD8 /* libavdevice.a in Frameworks */,
-				3C6F2DE42199B07900C87BD8 /* libswresample.a in Frameworks */,
-				3C6F2DE52199B07900C87BD8 /* libavresample.a in Frameworks */,
-				3C6F2DE92199B07900C87BD8 /* libavfilter.a in Frameworks */,
 				3C6F2CB321995CF000C87BD8 /* AudioToolbox.framework in Frameworks */,
-				3C6F2DE62199B07900C87BD8 /* libavformat.a in Frameworks */,
-				3C6F2DEB2199B07900C87BD8 /* libswscale.a in Frameworks */,
 				3C6F2CB121995C8000C87BD8 /* VideoToolbox.framework in Frameworks */,
 				3C6F2CAF21995C7600C87BD8 /* CoreMedia.framework in Frameworks */,
-				3C6F2DE82199B07900C87BD8 /* libavutil.a in Frameworks */,
 				3C6F2CAD21995C6F00C87BD8 /* libiconv.tbd in Frameworks */,
 				3C6F2CAB21995C6500C87BD8 /* libbz2.tbd in Frameworks */,
-				3C6F2DE72199B07900C87BD8 /* libavcodec.a in Frameworks */,
-				3C6F2DEC2199B07900C87BD8 /* libpostproc.a in Frameworks */,
 				3C6F2CA921995C5400C87BD8 /* libz.tbd in Frameworks */,
 				455E369523511573FBB48D04 /* libPods-Video-Demo.a in Frameworks */,
 			);
@@ -730,6 +706,7 @@
 				3CC23664219514410014DE68 /* Frameworks */,
 				3CC23665219514410014DE68 /* Resources */,
 				692A5E22DB88D34D3682C47B /* [CP] Copy Pods Resources */,
+				E98559EF91D0E06F1D7B06DB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -922,6 +899,28 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Video-Demo/Pods-Video-Demo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E98559EF91D0E06F1D7B06DB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Video-Demo/Pods-Video-Demo-frameworks.sh",
+				"${PODS_ROOT}/AliyunVideoSDKBasic/frameworks/AliyunVideoSDKPro.framework",
+				"${PODS_ROOT}/PLPlayerKit/Pod/Library/PLPlayerKit.framework",
+				"${PODS_ROOT}/QuCore-ThirdParty/frameworks/alivcffmpeg.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AliyunVideoSDKPro.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PLPlayerKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/alivcffmpeg.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Video-Demo/Pods-Video-Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -929,18 +928,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6F2E75219A55E000C87BD8 /* ffmpeg_opt.c in Sources */,
 				3CC2366F219514410014DE68 /* ViewController.mm in Sources */,
-				3C6F2E76219A55E000C87BD8 /* cmdutils.c in Sources */,
-				3C6F2E77219A55E000C87BD8 /* ffmpeg_hw.c in Sources */,
 				3CC2367A219514420014DE68 /* main.m in Sources */,
-				3C6F2E73219A55E000C87BD8 /* ffmpeg_filter.c in Sources */,
 				3C6F2C9C219526C200C87BD8 /* FecthVideoCell.m in Sources */,
 				3C6F2CA02195589200C87BD8 /* UIImage+Extension.m in Sources */,
-				3C6F2E78219A55E000C87BD8 /* ffmpeg.c in Sources */,
 				3CB720BF2195235200B40340 /* FetchVideoController.m in Sources */,
 				3C6F2CA421956F2D00C87BD8 /* SubmitController.m in Sources */,
-				3C6F2E74219A55E000C87BD8 /* ffmpeg_videotoolbox.c in Sources */,
 				3CC2366C219514410014DE68 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,16 +7,16 @@
 //
 
 #import "SubmitController.h"
-#import "ffmpeg.h"
+//#import "ffmpeg.h"
 
 #import <ReactiveObjC/ReactiveObjC.h>
-//#import <PLShortVideoKit/PLShortVideoKit.h>
-//#import <AliyunVideoSDKPro/AliyunVideoSDKPro.h>
+#import <PLShortVideoKit/PLShortVideoKit.h>
+#import <AliyunVideoSDKPro/AliyunVideoSDKPro.h>
 
 
 static __weak SubmitController *__this__ = nil;
 
-@interface SubmitController ()
+@interface SubmitController ()<AliyunCropDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *Btn1080P;
 @property (weak, nonatomic) IBOutlet UIButton *btn720P;
 @property (weak, nonatomic) IBOutlet UIButton *btn480P;
@@ -29,6 +29,8 @@ static __weak SubmitController *__this__ = nil;
 @property (nonatomic, strong) NSDate *startTime;
     
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic, assign) float fps;
+@property (nonatomic, strong) AliyunCrop *cropOptions;
 @end
 
 @implementation SubmitController
@@ -55,7 +57,8 @@ static __weak SubmitController *__this__ = nil;
     NSArray *tracks = [self.asset tracksWithMediaType:AVMediaTypeVideo];
     if([tracks count] > 0) {
         AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
-        NSLog(@"%.f FPS %dx%d", videoTrack.nominalFrameRate, (int)videoTrack.naturalSize.width, (int)videoTrack.naturalSize.height);
+        self.fps = videoTrack.nominalFrameRate;
+        NSLog(@"%.02f FPS %dx%d", videoTrack.nominalFrameRate, (int)videoTrack.naturalSize.width, (int)videoTrack.naturalSize.height);
     }
     self.btnCancle.enabled = NO;
     
@@ -100,9 +103,36 @@ static __weak SubmitController *__this__ = nil;
 
 - (IBAction)cancleExport {
     [self checkSupportPreset];
-    self.progressView.progress = 0;
-    [self.exportSession cancelExport];
-    self.exportSession = nil;
+    switch (self.segmentedControl.selectedSegmentIndex) {
+        case 0:
+        {
+            self.progressView.progress = 0;
+            [self.exportSession cancelExport];
+            self.exportSession = nil;
+            break;
+        }
+        case 1:
+        {
+            self.progressView.progress = 0;
+            break;
+        }
+        case 2:
+        {
+            if (self.cropOptions) {
+                [self.cropOptions cancel];
+                self.cropOptions = nil;
+            }
+            self.progressView.progress = 0;
+            break;
+        }
+        case 3:
+        {
+            self.progressView.progress = 0;
+            break;
+        }
+        default:
+            break;
+    }
     self.btnCancle.enabled = NO;
 }
 
@@ -116,7 +146,7 @@ static __weak SubmitController *__this__ = nil;
         }
         case 1:
         {
-            [self useFFmpeg:presetName fileName:fileName];
+//            [self useFFmpeg:presetName fileName:fileName];
             break;
         }
         case 2:
@@ -136,7 +166,7 @@ static __weak SubmitController *__this__ = nil;
 
 - (void)useSystem:(NSString *)presetName fileName:(NSString *)fileName {
     
-    NSString *ouput_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"/tmp"] stringByAppendingPathComponent:fileName];
+    NSString *ouput_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"/tmp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"system_%@",fileName]];
 
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:self.asset presetName:presetName];
     //输出URL
@@ -200,8 +230,10 @@ static __weak SubmitController *__this__ = nil;
 }
 
 
+#warning 集成阿里 七牛 SDK 后 ffmpeg 有冲突,导致崩溃
+/*
 - (void)useFFmpeg:(NSString *)presetName fileName:(NSString *)fileName {
-    
+
     NSString *input_path = [self.asset.URL.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
     NSString *ouput_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"/tmp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"ffmpeg_%@", fileName]];
     NSString *size = nil;
@@ -268,8 +300,29 @@ static void __FFmpegCallBack(int64_t current, int64_t total) {
         ffmpeg_main(argc, argv, &__FFmpegCallBack);
     }
 }
+*/
 - (void)useAliYun:(NSString *)presetName fileName:(NSString *)fileName {
-    
+    NSString *input_path = [self.asset.URL.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
+    NSString *ouput_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"/tmp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"ali_%@", fileName]];
+    if (self.cropOptions) {
+        [self.cropOptions cancel];
+    }
+    self.cropOptions = [[AliyunCrop alloc] init];
+    self.cropOptions.delegate = self;
+    self.cropOptions.inputPath = input_path;
+    self.cropOptions.outputPath = ouput_path;
+    self.cropOptions.outputSize = CGSizeMake(1920, 1080);
+    self.cropOptions.fps = self.fps;
+    self.cropOptions.encodeMode = 1;
+    self.cropOptions.fadeDuration = 0;
+    self.cropOptions.useHW = YES;
+    self.cropOptions.shouldOptimize = YES;
+    self.cropOptions.videoQuality = AliyunVideoQualityVeryHight;
+    self.cropOptions.cropMode = AliyunCropCutModeScaleAspectFill;
+    [self.cropOptions startCrop];
+    [self disableAllBtn];
+    self.btnCancle.enabled = YES;
+
 }
 - (void)useQiNiu:(NSString *)presetName fileName:(NSString *)fileName {
     
@@ -295,5 +348,41 @@ static void __FFmpegCallBack(int64_t current, int64_t total) {
         [self checkSupportPreset];
     }
 }
+#pragma mark - AliyunCropDelegate
 
+/**
+ 裁剪失败回调
+ @param error 错误码
+ */
+- (void)cropOnError:(int)error {
+    NSLog(@"ali error: %d", error);
+    self.cropOptions = nil;
+    self.btnCancle.enabled = NO;
+}
+
+/**
+ 裁剪进度回调
+ @param progress 当前进度 0-1
+ */
+- (void)cropTaskOnProgress:(float)progress {
+    self.progressView.progress = progress;
+}
+
+/**
+ 裁剪完成回调
+ */
+- (void)cropTaskOnComplete {
+    NSLog(@"ali 转码完成");
+    self.cropOptions = nil;
+    self.btnCancle.enabled = NO;
+}
+
+/**
+ 主动取消或退后台时回调
+ */
+- (void)cropTaskOnCancel {
+    NSLog(@"ali 转码取消");
+    self.cropOptions = nil;
+    self.btnCancle.enabled = NO;
+}
 @end

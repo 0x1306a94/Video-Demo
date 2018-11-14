@@ -12,9 +12,9 @@ target 'Video-Demo' do
   pod 'SDWebImage'
   pod 'Aspects'
   pod 'FLEX'
-  pod 'AliyunVideoSDKBasic'
-  pod 'PLShortVideoKit'
-  pod 'PLPlayerKit'
+#  pod 'AliyunVideoSDKBasic'
+#  pod 'PLShortVideoKit'
+  pod 'SDAVAssetExportSession', :git => 'https://github.com/rs/SDAVAssetExportSession.git'
   
   pod 'ZFPlayer', :subspecs => [
     'AVPlayer',

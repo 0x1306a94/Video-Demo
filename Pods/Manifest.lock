@@ -1,33 +1,13 @@
 PODS:
-  - AliyunOSSiOS (2.10.7)
-  - AliyunVideoSDKBasic (3.7.5):
-    - QuCore-ThirdParty
-    - VODUpload
   - Aspects (1.4.1)
   - FLEX (2.4.0)
-  - HappyDNS (0.3.14)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
-  - PLPlayerKit (3.3.3):
-    - PLPlayerKit/iphoneos (= 3.3.3)
-  - PLPlayerKit/iphoneos (3.3.3)
-  - PLShortVideoKit (1.15.0):
-    - PLShortVideoKit/ex-libMuseProcessor (= 1.15.0)
-    - PLShortVideoKit/libMuseProcessor (= 1.15.0)
-    - Qiniu (= 7.2.5)
-  - PLShortVideoKit/ex-libMuseProcessor (1.15.0):
-    - Qiniu (= 7.2.5)
-  - PLShortVideoKit/libMuseProcessor (1.15.0):
-    - Qiniu (= 7.2.5)
-  - Qiniu (7.2.5):
-    - HappyDNS (~> 0.3)
-  - QuCore-ThirdParty (3.7.5)
   - ReactiveObjC (3.1.0)
+  - SDAVAssetExportSession (0.0.4)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
-  - VODUpload (1.4.1):
-    - AliyunOSSiOS
   - ZFPlayer/AVPlayer (3.2.1):
     - ZFPlayer/Core
   - ZFPlayer/ControlView (3.2.1):
@@ -35,53 +15,45 @@ PODS:
   - ZFPlayer/Core (3.2.1)
 
 DEPENDENCIES:
-  - AliyunVideoSDKBasic
   - Aspects
   - FLEX
   - Masonry
   - MBProgressHUD
-  - PLPlayerKit
-  - PLShortVideoKit
   - ReactiveObjC
+  - SDAVAssetExportSession (from `https://github.com/rs/SDAVAssetExportSession.git`)
   - SDWebImage
   - ZFPlayer/AVPlayer
   - ZFPlayer/ControlView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - AliyunOSSiOS
-    - AliyunVideoSDKBasic
     - Aspects
     - FLEX
-    - HappyDNS
     - Masonry
     - MBProgressHUD
-    - PLPlayerKit
-    - PLShortVideoKit
-    - Qiniu
-    - QuCore-ThirdParty
     - ReactiveObjC
     - SDWebImage
-    - VODUpload
     - ZFPlayer
 
+EXTERNAL SOURCES:
+  SDAVAssetExportSession:
+    :git: https://github.com/rs/SDAVAssetExportSession.git
+
+CHECKOUT OPTIONS:
+  SDAVAssetExportSession:
+    :commit: af4728e5fb83b618a6a548fe78b1bdf6b612fba1
+    :git: https://github.com/rs/SDAVAssetExportSession.git
+
 SPEC CHECKSUMS:
-  AliyunOSSiOS: 602b6a4e70e62a5f0a6431c20496343141d7e66f
-  AliyunVideoSDKBasic: c3b3a7fdef04ac9979b2ec317a11efdd49fff7ae
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  HappyDNS: dc6a164ee81979093123c241c6353bcf0218add6
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  PLPlayerKit: 8089fa9ae8e2169cd5b3f1deb60041c676dc55e5
-  PLShortVideoKit: fc509030a1acbe0ad116fe86f955e2373708335c
-  Qiniu: 909b408ee489ea54827e9717be90b94bc9dfbc48
-  QuCore-ThirdParty: 998a7b9beab01360329766a835bf09890fcdd5d7
   ReactiveObjC: 2a38ea15335de4119d8b17caf1db1484f61db902
+  SDAVAssetExportSession: 0926b6bf12cc4e9179540957cf5c4233b78f4af0
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
-  VODUpload: 2a4444bc30aeaa372f7158b797d0c726d7389353
   ZFPlayer: 00292c75ee52f5c2e4056c4fe911aa7697f5559f
 
-PODFILE CHECKSUM: 87f10a4cf74ca89554ba73db32e8b9c8b3edd8f4
+PODFILE CHECKSUM: 56241541115f8e0e0c88530ae7634a03b40858e8
 
 COCOAPODS: 1.6.0.beta.2

@@ -154,12 +154,10 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/AliyunVideoSDKBasic/frameworks/AliyunVideoSDKPro.framework"
-  install_framework "${PODS_ROOT}/PLPlayerKit/Pod/Library/PLPlayerKit.framework"
   install_framework "${PODS_ROOT}/QuCore-ThirdParty/frameworks/alivcffmpeg.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/AliyunVideoSDKBasic/frameworks/AliyunVideoSDKPro.framework"
-  install_framework "${PODS_ROOT}/PLPlayerKit/Pod/Library/PLPlayerKit.framework"
   install_framework "${PODS_ROOT}/QuCore-ThirdParty/frameworks/alivcffmpeg.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="Btn1080P" destination="GuB-u3-znJ" id="dzl-xr-0aA"/>
                 <outlet property="btn480P" destination="GIF-Oc-RtF" id="hsq-bR-D9t"/>
+                <outlet property="btn540P" destination="VKu-y2-jMw" id="HI5-KK-Bvd"/>
                 <outlet property="btn720P" destination="IKY-P9-dqt" id="27N-W5-O6z"/>
                 <outlet property="btnCancle" destination="BQb-se-Dav" id="vfB-x1-VBf"/>
                 <outlet property="progressView" destination="Ou7-Sr-MWY" id="GG9-eO-ccz"/>
@@ -32,22 +33,15 @@
                         <action selector="export720P" destination="-1" eventType="touchUpInside" id="EYv-qP-6hw"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIF-Oc-RtF">
-                    <rect key="frame" x="172" y="238" width="30" height="30"/>
-                    <state key="normal" title="480"/>
-                    <connections>
-                        <action selector="export480P" destination="-1" eventType="touchUpInside" id="heE-Yy-Hzi"/>
-                    </connections>
-                </button>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ou7-Sr-MWY">
-                    <rect key="frame" x="20" y="368" width="335" height="5"/>
+                    <rect key="frame" x="20" y="413" width="335" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="5" id="0Py-JF-UnX"/>
                     </constraints>
                     <color key="progressTintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </progressView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQb-se-Dav">
-                    <rect key="frame" x="172" y="318" width="31" height="30"/>
+                    <rect key="frame" x="172" y="363" width="31" height="30"/>
                     <state key="normal" title="取消"/>
                     <connections>
                         <action selector="cancleExport" destination="-1" eventType="touchUpInside" id="auk-UQ-Vkm"/>
@@ -57,7 +51,7 @@
                     <rect key="frame" x="58" y="100" width="259" height="29"/>
                     <segments>
                         <segment title="系统"/>
-                        <segment title="FFmpeg" enabled="NO"/>
+                        <segment title="FFmpeg"/>
                         <segment title="阿里"/>
                         <segment title="七牛"/>
                     </segments>
@@ -69,21 +63,37 @@
                         <action selector="export1080P" destination="-1" eventType="touchUpInside" id="q6q-QB-9tV"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VKu-y2-jMw">
+                    <rect key="frame" x="172" y="238" width="30" height="30"/>
+                    <state key="normal" title="540"/>
+                    <connections>
+                        <action selector="export540P" destination="-1" eventType="touchUpInside" id="Mir-6G-SP4"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIF-Oc-RtF">
+                    <rect key="frame" x="172" y="283" width="30" height="30"/>
+                    <state key="normal" title="480"/>
+                    <connections>
+                        <action selector="export480P" destination="-1" eventType="touchUpInside" id="heE-Yy-Hzi"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Ou7-Sr-MWY" secondAttribute="trailing" constant="20" id="8vE-OC-7kv"/>
                 <constraint firstItem="jDz-4P-SbG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AsU-xh-oFH"/>
                 <constraint firstItem="IKY-P9-dqt" firstAttribute="centerX" secondItem="GuB-u3-znJ" secondAttribute="centerX" id="KYm-Rh-ot0"/>
+                <constraint firstItem="GIF-Oc-RtF" firstAttribute="top" secondItem="VKu-y2-jMw" secondAttribute="bottom" constant="15" id="LMT-gk-JVi"/>
                 <constraint firstItem="GuB-u3-znJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Oby-TP-LjT"/>
+                <constraint firstItem="VKu-y2-jMw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OjJ-tQ-MbW"/>
                 <constraint firstItem="Ou7-Sr-MWY" firstAttribute="top" secondItem="GIF-Oc-RtF" secondAttribute="bottom" constant="100" id="ZNZ-ud-2Bm"/>
                 <constraint firstItem="Ou7-Sr-MWY" firstAttribute="top" secondItem="BQb-se-Dav" secondAttribute="bottom" constant="20" id="dWw-v0-m4B"/>
                 <constraint firstItem="GIF-Oc-RtF" firstAttribute="centerX" secondItem="IKY-P9-dqt" secondAttribute="centerX" id="djU-bc-ohV"/>
                 <constraint firstItem="jDz-4P-SbG" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="80" id="eKJ-QO-xyO"/>
                 <constraint firstItem="GuB-u3-znJ" firstAttribute="top" secondItem="jDz-4P-SbG" secondAttribute="bottom" constant="20" id="eaG-uQ-Dbq"/>
                 <constraint firstItem="IKY-P9-dqt" firstAttribute="top" secondItem="GuB-u3-znJ" secondAttribute="bottom" constant="15" id="hAj-lc-zrj"/>
-                <constraint firstItem="GIF-Oc-RtF" firstAttribute="top" secondItem="IKY-P9-dqt" secondAttribute="bottom" constant="15" id="iiw-iY-TAf"/>
                 <constraint firstItem="Ou7-Sr-MWY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="nsj-2B-QAo"/>
+                <constraint firstItem="VKu-y2-jMw" firstAttribute="top" secondItem="IKY-P9-dqt" secondAttribute="bottom" constant="15" id="vR6-bd-xUX"/>
                 <constraint firstItem="BQb-se-Dav" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="zKJ-4o-OdM"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

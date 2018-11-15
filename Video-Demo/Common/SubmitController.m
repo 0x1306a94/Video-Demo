@@ -404,49 +404,56 @@ static __weak SubmitController *__this__ = nil;
 }
 
 
-#warning 集成阿里 七牛 SDK 后 ffmpeg 有冲突,导致崩溃
 static NSString *__size__ = nil;
 - (void)useFFmpeg:(NSString *)presetName fileName:(NSString *)fileName {
 #if USE_TYPE == 1
+#warning 集成阿里 七牛 SDK 后 ffmpeg 有冲突,导致崩溃
     NSString *input_path = [self.asset.URL.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
     NSString *ouput_path = [[NSHomeDirectory() stringByAppendingPathComponent:@"/tmp"] stringByAppendingPathComponent:[NSString stringWithFormat:@"ffmpeg_%@", fileName]];
-    NSString *size = nil;
-    NSString *bit_rate = nil;
+    NSString *video_size = @"1920x1080"; // 输出视频尺寸
+    NSString *video_bit_rate = @"6000k"; // 输出视频码率
+    NSString *video_code = @"h264_videotoolbox"; // 视频编码器
+    NSString *video_frame_rate = @"30"; // 视频帧率
+    
+    NSString *audio_bit_rate = @"64k"; // 音频码率
+    NSString *audio_sample_rate = @"44.1k"; // 音频采样率
+    NSString *audio_channels = @"1"; // 音频声道数
+    NSString *audio_code = @"aac"; // 音频编码器
     if ([presetName isEqualToString:AVAssetExportPreset1920x1080]) {
-        size = @"1920x1080";
-        bit_rate = @"6000k";
+        video_size = @"1920x1080";
+        video_bit_rate = @"6000k";
     } else if ([presetName isEqualToString:AVAssetExportPreset1280x720]) {
-        size = @"1280x720";
-        bit_rate = @"4000k";
+        video_size = @"1280x720";
+        video_bit_rate = @"4000k";
     } else if ([presetName isEqualToString:AVAssetExportPreset960x540]) {
-        size = @"960x540";
-        bit_rate = @"3000k";
+        video_size = @"960x540";
+        video_bit_rate = @"3000k";
     } else if ([presetName isEqualToString:AVAssetExportPreset640x480]) {
-        size = @"640x480";
-        bit_rate = @"2000k";
+        video_size = @"640x480";
+        video_bit_rate = @"2000k";
     } else {
         return;
     }
-    __size__ = size;
+    __size__ = video_size;
     NSArray<NSString *> *commands = @[@"-y",
                                       @"-i",
                                       input_path,
                                       @"-s",
-                                      size,
-                                      @"-b",
-                                      bit_rate,
+                                      video_size,
+                                      @"-b:v",
+                                      video_bit_rate,
                                       @"-vcodec",
-                                      @"h264_videotoolbox",
+                                      video_code,
                                       @"-r",
-                                      @"30",
-                                      @"-ab",
-                                      @"64k",
+                                      video_frame_rate,
+                                      @"-b:a",
+                                      audio_bit_rate,
                                       @"-ar",
-                                      @"44.1k",
+                                      audio_sample_rate,
                                       @"-ac",
-                                      @"1",
+                                      audio_channels,
                                       @"-acodec",
-                                      @"aac",
+                                      audio_code,
                                       ouput_path];
     
     NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(startFFmpeg:) object:commands];
